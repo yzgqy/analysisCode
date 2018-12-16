@@ -6,6 +6,8 @@ import com.gqy.analysis_code.dao.ClassnodeMapper;
 import com.gqy.analysis_code.dao.EdgeMapper;
 import com.gqy.analysis_code.entity.Classnode;
 import com.gqy.analysis_code.entity.Edge;
+import com.gqy.analysis_code.entity.MethodEdge;
+import com.gqy.analysis_code.entity.MethodNode;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Opcodes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,12 @@ public class MethodAdapter  extends MethodVisitor implements Opcodes {
 
     public static HashMap<String, Edge> edges = new HashMap<String, Edge>();
 
+    public static HashMap<String, MethodEdge> methodEdges = new HashMap<String, MethodEdge>();
+
+
+
     public MethodAdapter(final MethodVisitor mv, final String className, final int access, final String name,
-                         final String desc, final String signature, final String[] exceptions,
-                         HashMap<String, Classnode> classnoedes) {
+                         final String desc, final String signature, final String[] exceptions) {
         // super(ASM5, mv, access, name, desc);
         super(ASM6, mv);
         this.className = className;
@@ -35,7 +40,7 @@ public class MethodAdapter  extends MethodVisitor implements Opcodes {
         this.desc = desc;
         this.signature = signature;
         this.exceptions = exceptions;
-        // this.classnoedes = classnoedes;
+
     }
 
     @Override
@@ -61,6 +66,42 @@ public class MethodAdapter  extends MethodVisitor implements Opcodes {
                 newedge.setWeight(1);
                 edges.put(edgeKey, newedge);
             }
+        }
+
+//        String sourceMethodName = this.className+"."+this.name+this.desc;
+        String sourceMethodName = (this.className+"."+this.name+this.desc).replace("/",".")
+                .replace(";",",")
+                .replace("(L","(")
+                .replace(",)",")")
+                .replace(",L",",");
+        int index1 = sourceMethodName.lastIndexOf(")");
+        sourceMethodName = sourceMethodName.substring(0,index1+1);
+
+//        String targetMethodName = owner+"."+name+desc;
+        String targetMethodName = (owner+"."+name+desc).replace("/",".")
+                .replace(";",",")
+                .replace("(L","(")
+                .replace(",)",")")
+                .replace(",L",",");
+        int index2 = targetMethodName.lastIndexOf(")");
+        targetMethodName = targetMethodName.substring(0,index2+1);
+
+        if (!sourceMethodName.equals(targetMethodName)) {
+            String edgeKey = sourceMethodName+ "_" + targetMethodName;
+
+            MethodEdge myedge = methodEdges.get(edgeKey);
+            if (myedge != null) {
+                int weight = myedge.getWeight();
+                myedge.setWeight(weight + 1);
+                methodEdges.put(edgeKey, myedge);
+            } else {
+                MethodEdge newedge = new MethodEdge();
+                newedge.setSource(sourceMethodName);
+                newedge.setTarget(targetMethodName);
+                newedge.setWeight(1);
+                methodEdges.put(edgeKey, newedge);
+            }
+
         }
     }
 }

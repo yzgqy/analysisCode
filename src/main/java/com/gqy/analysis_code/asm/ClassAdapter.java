@@ -7,6 +7,7 @@ import com.gqy.analysis_code.dao.EdgeMapper;
 import com.gqy.analysis_code.entity.Classnode;
 
 
+import com.gqy.analysis_code.entity.MethodNode;
 import org.springframework.asm.ClassVisitor;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Opcodes;
@@ -22,6 +23,8 @@ public class ClassAdapter extends ClassVisitor implements Opcodes {
     private boolean isInterface;
 
     public static HashMap<String ,Classnode> classnoedes = new HashMap<String ,Classnode>();
+    public static HashMap<String, MethodNode> methodNodes = new HashMap<String, MethodNode>();
+
     public ClassAdapter() {
         super(ASM6);
     }
@@ -53,8 +56,22 @@ public class ClassAdapter extends ClassVisitor implements Opcodes {
                                      final String[] exceptions) {
         MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
         if (!isInterface) {
-            mv = new MethodAdapter(mv, owner, access, name, desc, signature, exceptions,classnoedes);
+            mv = new MethodAdapter(mv, owner, access, name, desc, signature, exceptions);
         }
+
+        String MethodName = (this.owner+"."+name+desc)
+                .replace("/",".")
+                .replace(";",",")
+                .replace("(L","(")
+                .replace(",)",")")
+                .replace(",L",",");
+        int index = MethodName.lastIndexOf(")");
+        MethodName = MethodName.substring(0,index+1);
+
+        MethodNode sourceMethodNode = new MethodNode();
+        sourceMethodNode.setFullname(MethodName);
+        methodNodes.put(MethodName,sourceMethodNode);
+
         return mv;
     }
 }

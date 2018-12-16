@@ -24,3 +24,8 @@
 1、算法要求id从1开始
 
 `truncate table classnode; ` 将classnode清空执行，然后自增长id初始化为1开始
+
+
+**问题**
+
+1、动态方法需要用" "分割，不能用"，"

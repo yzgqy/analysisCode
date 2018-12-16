@@ -64,7 +64,7 @@ public class Main {
         // TODO Auto-generated method stub
         Louvain a = new Louvain();
         double beginTime = System.currentTimeMillis();
-        a.init("/Users/yzgqy/Desktop/classEdges.txt");
+        a.init("/Users/yzgqy/Desktop/methodEdges.txt");
         a.louvain();
         double endTime = System.currentTimeMillis();
         //writeOutputJson("/var/www/html/Louvain/miserables.json", a);  //输出至d3显示

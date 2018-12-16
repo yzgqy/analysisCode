@@ -65,11 +65,19 @@
         <!--</table>-->
 
         <!-- 要生成哪些表 -->
-        <table tableName="classnode" domainObjectName="Classnode"
+        <!--<table tableName="classnode" domainObjectName="Classnode"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="edge" domainObjectName="Edge"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <table tableName="methodnode" domainObjectName="MethodNode"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="edge" domainObjectName="Edge"
+        <table tableName="methodedge" domainObjectName="MethodEdge"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
