@@ -280,5 +280,4 @@ public class Louvain implements Cloneable{
             rebuildGraph(); // 重构图
         } while (true);
     }
-
 }

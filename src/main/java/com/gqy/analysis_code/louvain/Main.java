@@ -64,12 +64,12 @@ public class Main {
         // TODO Auto-generated method stub
         Louvain a = new Louvain();
         double beginTime = System.currentTimeMillis();
-        a.init("/Users/yzgqy/Desktop/methodEdges.txt");
+        a.init("/Users/yaya/Desktop/data.txt");
         a.louvain();
         double endTime = System.currentTimeMillis();
         //writeOutputJson("/var/www/html/Louvain/miserables.json", a);  //输出至d3显示
-        writeOutputCluster("/Users/yzgqy/Desktop/cluster.txt",a);  //打印每个节点属于哪个簇
-        writeOutputCircle("/Users/yzgqy/Desktop/circle.txt",a);   //打印每个簇有哪些节点
+        writeOutputCluster("/Users/yaya/Desktop/cluster.txt",a);  //打印每个节点属于哪个簇
+        writeOutputCircle("/Users/yaya/Desktop/result.txt",a);   //打印每个簇有哪些节点
         System.out.format("program running time: %f seconds%n", (endTime - beginTime) / 1000.0);
     }
 

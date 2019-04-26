@@ -152,7 +152,7 @@ public class TestBootController {
             String line = edge.getSourceid() + " " + edge.getTargetid() + " " + edge.getWeight();
             lines.add(line);
         }
-        writeFile02(lines, "/Users/yzgqy/Desktop/classEdges.txt");
+        writeFile02(lines, "/Users/yaya/Desktop/classEdges.txt");
         return result;
     }
 

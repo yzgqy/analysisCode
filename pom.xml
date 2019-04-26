@@ -11,7 +11,7 @@
 	<groupId>com.gqy</groupId>
 	<artifactId>analysis_code</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>analysis_code</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -35,12 +35,12 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Spring Boot Mybatis 依赖 -->
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${mybatis-spring-boot}</version>
-		</dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.3.2</version>
+        </dependency>
 
 		<!-- MySQL 连接驱动依赖 -->
 		<dependency>
